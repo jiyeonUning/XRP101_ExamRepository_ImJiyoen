@@ -37,6 +37,6 @@ public class PlayerMovement : MonoBehaviour
         // 대각선으로 이동 시 1.414배 빨리 움직이게 되는 문제의 경우,
         // 입력되는 Vector3의 값이 x, z로 두 개가 되기 때문에, 각자 나아가려는 방향이 맞물려 속도가 증가하는 것으로 보인다.
         // 따라서 속도를 어느 방향이든 일정하게 유지하기 위해, direction을 정규화 하는 normalized를 뒤에 덧붙인다.
-        transform.Translate(_status.MoveSpeed * Time.deltaTime * direction);
+        transform.Translate(_status.MoveSpeed * Time.deltaTime * direction.normalized);
     }
 }
