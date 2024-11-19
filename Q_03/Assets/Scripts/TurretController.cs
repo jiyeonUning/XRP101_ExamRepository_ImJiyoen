@@ -24,6 +24,26 @@ public class TurretController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Fire(other.transform);
+
+            if (other.GetComponentInParent<PlayerController>().Hp <= 0)
+            {
+                StopCoroutine(_coroutine);
+                _coroutine = null;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            StopCoroutine(_coroutine);
+
+            if (other.GetComponentInParent<PlayerController>().Hp <= 0)
+            {
+                StopCoroutine(_coroutine);
+                _coroutine = null;
+            }
         }
     }
 
