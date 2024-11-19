@@ -30,10 +30,11 @@ public class PlayerStatus : MonoBehaviour
     // 다시 set에서 값을 재설정하기 위해 다시 호출하는 과정을 반복하게 되어, 오버플로우가 일어나는 것으로 확인된다.
 
     // 해결 방안 : 반환할 자료형을 따로 두어서, 해당 값을 읽어들이고 반환하도록 한다.
+    private float moveSpeed;
     public float MoveSpeed
     {
-        get => MoveSpeed;
-        private set => MoveSpeed = value; // 문제가 발생하는 부분
+        get => moveSpeed;
+        private set => moveSpeed = value; // 문제가 발생하는 부분
     }
 
     private void Awake()
