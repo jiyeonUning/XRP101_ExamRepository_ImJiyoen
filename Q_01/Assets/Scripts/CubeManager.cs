@@ -43,6 +43,7 @@ public class CubeManager : MonoBehaviour
         // 큐브 오브젝트의 위치를 설정하는 함수.
 
         // _cubeSetPoint의 각 값에, 큐브 오브젝트가 이동할 위치의 좌표값을 입력받아 기입한다.
+        // _cubeSetPoint와 SetPoint는 CreateCube함수에서 이미 연동이 되었으므로, 순서상 해당 함수에서 _cubeSetPoint값을 변경하더라도 SetPoint에는 적용되지 않는다.
         _cubeSetPoint.x = x;
         _cubeSetPoint.y = y;
         _cubeSetPoint.z = z;
@@ -61,8 +62,6 @@ public class CubeManager : MonoBehaviour
         _cubeController = cube.GetComponent<CubeController>();
 
         // 이동할 위치가 저장된 Vector3를 SetPoint에 입력하여, SetPosition함수가 실행될 때 해당하는 위치로 이동하도록 한다.
-        // 현재 작성된 코드는, '입력된 좌표값 _cubeSetPoint는 큐브 오브젝트의 이동 좌표값 SetPoint(=값이 비어있음) 이다.'므로
-        // 큐브 오브젝트를 이동시키기 위해선 두 Vector3의 순서를 바꿔줄 필요성이 있다.
-        _cubeSetPoint = _cubeController.SetPoint;
+         _cubeController.SetPoint = _cubeSetPoint;
     }
 }

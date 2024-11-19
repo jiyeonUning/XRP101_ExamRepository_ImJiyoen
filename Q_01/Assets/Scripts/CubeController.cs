@@ -5,7 +5,8 @@ using UnityEngine;
 public class CubeController : MonoBehaviour
 {
     // 전역에서 사용이 가능한 Vector3 값
-    public Vector3 SetPoint { get; private set; }
+    // set, 즉 값 변경이 private인 상황이므로, set이 가능하도록 바꿔주었다.
+    public Vector3 SetPoint { get; set; }
 
     public void SetPosition()
     {
