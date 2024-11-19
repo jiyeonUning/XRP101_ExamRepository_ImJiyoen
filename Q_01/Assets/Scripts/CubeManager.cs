@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CubeManager : MonoBehaviour
@@ -31,15 +29,13 @@ public class CubeManager : MonoBehaviour
     private void Awake()
     {
         // 큐브 매니저는 게임이 플레이 될 때 해당 함수를 ()값에 맞추어 실행한다.
-        // 현재 CreateCube 함수가 아직 실행되지 않았으므로, 큐브 오브젝트는 아직 생성되지 않은 상태이다.
-        // 따라서 입력된 좌표에 따라 큐브가 이동하는 과정에서 오류가 발생한다.
-        SetCubePosition(3, 0, 3); // 현재 오류가 발생된 코드 위치 01
+        CreateCube();
     }
 
     private void Start()
     {
         // 큐브 매니저는 Awake 진행 후, 해당 함수를 통해 큐브를 생성한다.
-        CreateCube();
+        SetCubePosition(3, 0, 3);
     }
 
     private void SetCubePosition(float x, float y, float z)
@@ -52,8 +48,7 @@ public class CubeManager : MonoBehaviour
         _cubeSetPoint.z = z;
 
         // 입력받은 좌표값에 따라, 큐브 오브젝트를 이동할 수 있는 함수를 실행한다.
-        // 현재 입력된 위치값이 SetPosition 내에 입력되지 않은 상황이므로, 큐브는 이동하지 않는다.
-        _cubeController.SetPosition(); // 현재 오류가 발생된 코드 위치 02
+        _cubeController.SetPosition();
     }
 
     private void CreateCube()
