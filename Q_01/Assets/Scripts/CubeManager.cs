@@ -25,16 +25,15 @@ public class CubeManager : MonoBehaviour
     private Vector3 _cubeSetPoint;                   // 이동할 위치를 저장하여 사용하기 위한 좌표값
 
 
-
     private void Awake()
     {
-        // 큐브 매니저는 게임이 플레이 될 때 해당 함수를 ()값에 맞추어 실행한다.
+        // 큐브 매니저는 게임이 플레이 될 때, 해당 함수를 통해 큐브를 생성한다.
         CreateCube();
     }
 
     private void Start()
     {
-        // 큐브 매니저는 Awake 진행 후, 해당 함수를 통해 큐브를 생성한다.
+        // 큐브 매니저는 Awake 실행 후 해당 함수를 ()값에 맞추어 실행한다.
         SetCubePosition(3, 0, 3);
     }
 
@@ -43,13 +42,12 @@ public class CubeManager : MonoBehaviour
         // 큐브 오브젝트의 위치를 설정하는 함수.
 
         // _cubeSetPoint의 각 값에, 큐브 오브젝트가 이동할 위치의 좌표값을 입력받아 기입한다.
-        // _cubeSetPoint와 SetPoint는 CreateCube함수에서 이미 연동이 되었으므로, 순서상 해당 함수에서 _cubeSetPoint값을 변경하더라도 SetPoint에는 적용되지 않는다.
         _cubeSetPoint.x = x;
         _cubeSetPoint.y = y;
         _cubeSetPoint.z = z;
 
         // 입력받은 좌표값에 따라, 큐브 오브젝트를 이동할 수 있는 함수를 실행한다.
-        _cubeController.SetPosition();
+        _cubeController.SetPosition(_cubeSetPoint);
     }
 
     private void CreateCube()
@@ -61,7 +59,7 @@ public class CubeManager : MonoBehaviour
         // 생성된 큐브 오브젝트에서 CubeController 클래스를 참조하여 저장한다.
         _cubeController = cube.GetComponent<CubeController>();
 
-        // 이동할 위치가 저장된 Vector3를 SetPoint에 입력하여, SetPosition함수가 실행될 때 해당하는 위치로 이동하도록 한다.
-         _cubeController.SetPoint = _cubeSetPoint;
+        // 큐브 컨트롤러에서 자체적으로 본인의 Vector3값을 변경 가능하도록 하였기 때문에, 해당 코드는 사용하지 않게 된다.
+         //_cubeController.SetPoint = _cubeSetPoint;
     }
 }
