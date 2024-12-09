@@ -30,11 +30,6 @@ public class StateAttack : PlayerState
         Debug.Log("Attack On Update");
     }
 
-    public override void Exit()
-    {
-        Machine.ChangeState(StateType.Idle);
-    }
-
     private void Attack()
     {
         Collider[] cols = Physics.OverlapSphere(
@@ -44,9 +39,11 @@ public class StateAttack : PlayerState
 
         IDamagable damagable;
         foreach (Collider col in cols)
-        {
+        {   
+            // 문제 요인 : 가져온 콜라이더 배열 중 IDamagable을 참조하는데, 기존 ShieldMonster에는 IDamagable이 없다.
+            // 해결 방안 : ?를 통해, IDamagable이 참조가 완료되었는지 확인 후, TakeHit 함수를 호출할 수 있도록 한다.
             damagable = col.GetComponent<IDamagable>();
-            damagable.TakeHit(Controller.AttackValue);
+            damagable?.TakeHit(Controller.AttackValue); // = if (damagable != null 일 때, TakeHit 함수 호출)
         }
     }
 
@@ -55,7 +52,7 @@ public class StateAttack : PlayerState
         yield return _wait;
 
         Attack();
-        Exit();
+        Machine.ChangeState(StateType.Idle);
     }
 
 }

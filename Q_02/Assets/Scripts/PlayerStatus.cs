@@ -35,7 +35,7 @@ public class PlayerStatus : MonoBehaviour
     {
         get => moveSpeed;
         private set => moveSpeed = value; // 문제가 발생하는 부분
-    }
+    } // or public float MoveSpeed { get; private set; } = 자동 구현 프로퍼티
 
     private void Awake()
     {
