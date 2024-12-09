@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))] // = ()의 컴포넌트를 자동으로 추가시켜주는 []. 해당 코드가 존재할 경우, 임의로 컴포넌트의 삭제가 불가능하다.
 public class BulletController : PooledBehaviour
 {
     [SerializeField] private float _force;          // 총알에 가해지는 힘
@@ -19,6 +20,9 @@ public class BulletController : PooledBehaviour
 
     private void OnEnable()
     {
+        // 벨로시티 초기화 기능
+        _rigidbody.velocity = Vector3.zero;
+
         // 총알이 활성화 되었을 때, 다음 코루틴을 실행한다.
         StartCoroutine(DeactivateRoutine());
     }

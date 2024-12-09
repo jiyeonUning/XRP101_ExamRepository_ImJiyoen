@@ -65,4 +65,16 @@ public class PlayerController : MonoBehaviour
         _audio.Play();
         gameObject.SetActive(false);
     }
+
+    public void Play()
+    {
+        // 설정 지정 -> 소리 재생하는 로직이 있다고 가정
+
+        // 오디오 클립이 루프 상태가 아닐 때,
+        if (!_audio.loop)
+        {
+            // 해당 오디오를 가진 게임 오브젝트를 삭제한다.
+            Destroy(gameObject, _audio.clip.length);
+        }
+    }
 }

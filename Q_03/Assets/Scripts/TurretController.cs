@@ -24,12 +24,6 @@ public class TurretController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Fire(other.transform);
-
-            if (other.GetComponentInParent<PlayerController>().Hp <= 0)
-            {
-                StopCoroutine(_coroutine);
-                _coroutine = null;
-            }
         }
     }
 
@@ -37,13 +31,7 @@ public class TurretController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StopCoroutine(_coroutine);
-
-            if (other.GetComponentInParent<PlayerController>().Hp <= 0)
-            {
-                StopCoroutine(_coroutine);
-                _coroutine = null;
-            }
+            StopFire();
         }
     }
 
@@ -61,6 +49,15 @@ public class TurretController : MonoBehaviour
     {
         while (true)
         {
+            // 타겟이 비활성화 되어 있을 때,
+            if (!target.gameObject.activeSelf)
+            {
+                // 코루틴을 중지한다.
+                _coroutine = null;
+                yield break;
+            }
+
+
             // 1.5초에 한 번 씩, 아래 코드를 실행한다.
             yield return _wait;
             
@@ -85,5 +82,13 @@ public class TurretController : MonoBehaviour
     {
         // 타겟을 향해 총알이 발사되는 코루틴을 실행한다.
         _coroutine = StartCoroutine(FireRoutine(target));
+    }
+
+    void StopFire()
+    {
+        if (_coroutine == null) return;
+
+        StopCoroutine(_coroutine);
+        _coroutine = null;
     }
 }
